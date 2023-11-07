@@ -1,20 +1,15 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'job.freezed.dart';
 
 typedef JobID = String;
 
-@immutable
-class Job extends Equatable {
-  const Job({required this.id, required this.name, required this.ratePerHour});
-  final JobID id;
-  final String name;
-  final int ratePerHour;
-
-  @override
-  List<Object> get props => [name, ratePerHour];
-
-  @override
-  bool get stringify => true;
+@freezed
+class Job with _$Job {
+  const factory Job({
+    required JobID id,
+    required String name,
+    required int ratePerHour,
+  }) = _Job;
 
   factory Job.fromMap(Map<String, dynamic> data, String id) {
     final name = data['name'] as String;
